@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Logo-Wahl</title>
+<style>
+:root{--bg:#0b0f14;--card:#141a22;--card2:#0f151c;--line:#232c38;--fg:#e8eef5;--muted:#8894a3;--acc:#39d353;--red:#e5534b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:10px}
+.wrap{max-width:1100px;margin:0 auto;padding:26px 16px 10px}
+h1{margin:0 0 6px;font-size:26px;letter-spacing:-.6px}
+.sub{margin:0;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:22px}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .13s,border-color .13s;user-select:none}
+.card:hover{transform:translateY(-2px);border-color:#3a4757}
+.card.sel{border-color:var(--acc);box-shadow:0 0 0 2px rgba(57,211,83,.3)}
+.card.shake{animation:sh .28s}
+@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.thumb{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--card2);padding:8px}
+.thumb .ph{color:#3d4b5c;font-size:22px;font-weight:700}
+.thumb img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain}
+.cap{padding:8px 10px;font-size:12px;color:var(--muted);text-align:center;border-top:1px solid var(--line);letter-spacing:.5px}
+.tick{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#04120a;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:.14s}
+.card.sel .tick{opacity:1;transform:scale(1)}
+.banner{margin:18px 0 0;padding:11px 14px;border-radius:10px;background:#16281c;border:1px solid #2c5a37;color:#a9e6b8;font-size:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.banner.warn{background:#2a1e14;border-color:#5c3f22;color:#e8c49a}
+.banner.hidden{display:none}
+.bar{position:sticky;bottom:0;z-index:40;display:flex;align-items:center;gap:14px;max-width:1100px;margin:24px auto 0;padding:12px 16px;background:rgba(11,15,20,.94);border-top:1px solid var(--line);backdrop-filter:blur(6px)}
+.counter{font-variant-numeric:tabular-nums;font-size:15px;color:var(--muted)}
+.counter b{color:var(--fg);font-size:20px}
+.counter small{display:block;font-size:11px;color:#5d6b7a;letter-spacing:.6px}
+button.main{background:var(--acc);color:#04120a;border:0;border-radius:9px;padding:11px 26px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+button.main:disabled{background:#26303c;color:#66707d;cursor:not-allowed}
+#bar .main{margin-left:auto}
+.pbtn{background:#141c26;color:#b9c6d4;border:1px solid #26313d;border-radius:7px;padding:6px 12px;cursor:pointer;font-family:inherit;font-size:12px}
+.pbtn:hover{background:#1c2734}
+#key{position:fixed;right:14px;bottom:14px;z-index:60;width:34px;height:34px;border-radius:50%;background:#121a23;border:1px solid #232c38;color:#5d6b7a;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:.16;transition:.2s}
+#key:hover{opacity:1;color:var(--acc);border-color:#2f7a44}
+#hint{position:fixed;right:56px;bottom:22px;z-index:60;font-size:11px;color:var(--acc);letter-spacing:1.5px;opacity:0;transition:.2s}
+#hint.on{opacity:.85}
+
+/* ---------- Code-Fenster ---------- */
+#gate{position:fixed;inset:0;z-index:90;background:rgba(5,8,11,.82);display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(3px)}
+#gate.hidden{display:none}
+.gatecard{width:100%;max-width:380px;background:#111821;border:1px solid #26313d;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.gatecard h2{margin:0 0 4px;font-size:19px}
+.gatecard p{margin:0 0 20px;font-size:13px;color:var(--muted)}
+.code{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
+.code input{width:44px;height:56px;text-align:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;background:#0c131a;border:1px solid #26313d;border-radius:10px;color:var(--fg);font-family:inherit;outline:none;transition:.15s}
+.code input:focus{border-color:var(--acc);box-shadow:0 0 0 2px rgba(57,211,83,.22)}
+.code.bad{animation:sh .3s}
+.gateerr{min-height:18px;font-size:12.5px;color:var(--red);margin-bottom:14px}
+.gateactions{display:flex;gap:10px;justify-content:center}
+
+/* ---------- Statistiken ---------- */
+#pit{position:fixed;inset:0;z-index:80;background:#07090c;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+#pit.hidden{display:none}
+.pitbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 16px;background:#0d1218;border-bottom:1px solid #1d2733;font-size:13px;letter-spacing:1px;flex-wrap:wrap}
+.pitbar b{color:var(--acc);letter-spacing:3px}
+.grow{flex:1}
+.pitbody{padding:20px 16px 60px;max-width:1000px;margin:0 auto}
+.stat{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.stat div{background:#0e151d;border:1px solid #1d2733;border-radius:10px;padding:12px 18px;min-width:118px}
+.stat span{display:block;font-size:11px;color:#63758a;letter-spacing:1.4px;text-transform:uppercase}
+.stat strong{font-size:26px;color:#e8eef5}
+.row{display:grid;grid-template-columns:1fr 54px;align-items:center;gap:10px;margin-bottom:6px;font-size:13px}
+.row .nm{color:#b9c6d4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{height:9px;background:#131c26;border-radius:99px;overflow:hidden;margin-top:3px}
+.fill{height:100%;background:linear-gradient(90deg,#1f6f36,#39d353)}
+.fill.zero{background:#26313d}
+.cnt{text-align:right;color:#7f8ea0;font-variant-numeric:tabular-nums}
+.cnt.win{color:var(--acc);font-weight:700}
+.dim{color:#63758a;font-size:13px}
+h3{font-size:12px;letter-spacing:2px;color:#63758a;text-transform:uppercase;margin:28px 0 12px;border-bottom:1px solid #1d2733;padding-bottom:6px}
+.days{display:flex;gap:6px;flex-wrap:wrap}
+.days div{background:#0e151d;border:1px solid #1d2733;border-radius:8px;padding:6px 10px;font-size:12px;color:#8894a3;font-variant-numeric:tabular-nums}
+.days div b{color:#e8eef5}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Logo-Wahl</h1>
+  <p class="sub">Wähle deine <b>3</b> Lieblingslogos. Alle Logos sind anonym nummeriert.</p>
+  <div id="banner" class="banner hidden"></div>
+  <main id="grid"></main>
+</div>
+
+<div class="bar" id="bar">
+  <div class="counter"><b id="cnt">0</b> / 3 gewählt<small id="hintLine">noch 3 wählen</small></div>
+  <button id="submitBtn" class="main" disabled>Abstimmen</button>
+</div>
+
+<div id="key" title="Statistiken">
+  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M8 10V7a4 4 0 0 1 8 0v3"/><rect x="5" y="10" width="14" height="9" rx="2"/>
+  </svg>
+</div>
+<div id="hint"></div>
+
+<div id="gate" class="hidden">
+  <div class="gatecard">
+    <h2>Statistiken</h2>
+    <p>6-stelliger Code</p>
+    <div class="code" id="codeBoxes">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+    </div>
+    <div class="gateerr" id="gateErr"></div>
+    <div class="gateactions">
+      <button class="main" id="gateOk">Öffnen</button>
+      <button class="pbtn" id="gateCancel">Abbrechen</button>
+    </div>
+  </div>
+</div>
+
+<div id="pit" class="hidden">
+  <div class="pitbar">
+    <b>STATISTIKEN</b>
+    <span class="dim" id="pitSub"></span>
+    <span class="grow"></span>
+    <button class="pbtn" id="pitRefresh">aktualisieren</button>
+    <button class="pbtn" id="pitCsv">CSV</button>
+    <button class="pbtn" id="pitReset">reset</button>
+    <button class="pbtn" id="pitClose">schliessen</button>
+  </div>
+  <div class="pitbody" id="pitBody"></div>
+</div>
+
+<script>
+/* ================== 1. KONFIGURATION ================== */
+const CONFIG = {
+  API_URL: "https://script.google.com/macros/s/AKfycbwupLHPztigZRR5MV4kQ9vB1qHZHMqB4_SqFXuCS4mxA6S5KbV6jSMYq_E7_89IpXa1/exec",
+
+  VOTES: 3,
+
+  /* Nur nötig, wenn API_URL leer ist (Offline-Test). */
+  OFFLINE_CODE: "111210",
+
+  /* Dateinamen der Logos in der Reihenfolge, in der sie angezeigt werden.
+     Die Namen werden NICHT angezeigt – nur die Nummer. */
+  LOGO_DIR: "logos/",
+  LOGO_EXT: ".png",
+  logos: ["01","02","03","04","05","06","07","08","09","10","11",
+        "12","13","14","15","16","17","18","19","20","21","22"]
+};
+
+/* ================== 2. LOGOS AUFBAUEN ================== */
+const LOGOS = [], MAP = {};
+CONFIG.logos.forEach((f, i) => {
+  const n = i + 1;
+  const id = "L" + String(n).padStart(2, "0");
+  const o = {
+    id, num: n, label: "Logo " + n,
+    file: /^(https?:|\/|\.)/.test(f) ? f : CONFIG.LOGO_DIR + f + CONFIG.LOGO_EXT
+  };
+  LOGOS.push(o); MAP[id] = o;
+});
+
+/* ================== 3. BACKEND ================== */
+const LSKEY  = "logoWahl_v4";
+const VKEY   = "logoWahl_voter";
+const MYKEY  = "logoWahl_myvote";
+const CKEY   = "logoWahl_code";
+
+const LS = {
+  read(){ try { return JSON.parse(localStorage.getItem(LSKEY) || "[]"); } catch(e){ return []; } },
+  write(a){ localStorage.setItem(LSKEY, JSON.stringify(a)); }
+};
+
+let voterId = localStorage.getItem(VKEY);
+if (!voterId){
+  voterId = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  localStorage.setItem(VKEY, voterId);
+}
+
+const Backend = {
+  online: !!CONFIG.API_URL,
+  async _post(payload){
+    const r = await fetch(CONFIG.API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    return await r.json();
+  },
+  async submit(picks, voter){
+    if (!this.online){
+      const all = LS.read();
+      const i = all.findIndex(v => v.voter === voter);
+      const rec = { voter, picks, ts: Date.now() };
+      if (i >= 0) all[i] = rec; else all.push(rec);
+      LS.write(all);
+      return { ok:true };
+    }
+    return await this._post({ action:"vote", picks, voter });
+  },
+  async stats(code){
+    if (!this.online){
+      const all = LS.read(), counts = {}, days = {};
+      all.forEach(v => {
+        v.picks.forEach(p => counts[p] = (counts[p] || 0) + 1);
+        const d = new Date(v.ts).toISOString().slice(0, 10);
+        days[d] = (days[d] || 0) + 1;
+      });
+      const ts = all.map(v => v.ts);
+      return {
+        ok:true, submissions:all.length, devices:all.length,
+        total: all.reduce((a, b) => a + b.picks.length, 0),
+        counts, days,
+        first: ts.length ? new Date(Math.min(...ts)).toISOString() : null,
+        last:  ts.length ? new Date(Math.max(...ts)).toISOString() : null
+      };
+    }
+    const r = await fetch(CONFIG.API_URL + "?action=stats&code=" + encodeURIComponent(code) + "&t=" + Date.now());
+    return await r.json();
+  },
+  async reset(code){
+    if (!this.online){ LS.write([]); return { ok:true }; }
+    return await this._post({ action:"reset", code });
+  }
+};
+
+/* ================== 4. STATE ================== */
+const state = { sel:new Set(), submitted:false, code:null, timer:null };
+const $ = s => document.querySelector(s);
+const grid = $("#grid"), banner = $("#banner"), cnt = $("#cnt"), hintLine = $("#hintLine");
+const submitBtn = $("#submitBtn"), pit = $("#pit"), pitBody = $("#pitBody");
+
+/* ================== 5. LOGOS RENDERN ================== */
+function build(){
+  grid.innerHTML = LOGOS.map(l =>
+    '<div class="card" data-id="' + l.id + '">' +
+      '<div class="thumb"><span class="ph">' + l.num + '</span>' +
+      '<img src="' + l.file + '" alt="Logo ' + l.num + '" loading="lazy" onerror="this.remove()"></div>' +
+      '<div class="cap">Logo ' + l.num + '</div><div class="tick">&#10003;</div>' +
+    '</div>'
+  ).join("");
+  grid.querySelectorAll(".card").forEach(c => c.addEventListener("click", () => onPick(c)));
+}
+build();
+
+/* ================== 6. AUSWAHL ================== */
+function paint(){
+  grid.querySelectorAll(".card").forEach(c => c.classList.toggle("sel", state.sel.has(c.dataset.id)));
+  cnt.textContent = state.sel.size;
+  const left = CONFIG.VOTES - state.sel.size;
+  hintLine.textContent = state.submitted ? "abgegeben" : (left > 0 ? "noch " + left + " wählen" : "bereit");
+  submitBtn.disabled = state.submitted || state.sel.size !== CONFIG.VOTES;
+}
+function onPick(card){
+  const id = card.dataset.id;
+  if (state.sel.has(id)){ state.sel.delete(id); state.submitted = false; }
+  else if (state.sel.size < CONFIG.VOTES){ state.sel.add(id); state.submitted = false; }
+  else { card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake"); }
+  paint();
+}
+
+/* ================== 7. ABSENDEN ================== */
+function showBanner(html, warn){
+  banner.className = "banner" + (warn ? " warn" : "");
+  banner.innerHTML = html;
+}
+function labelsOf(ids){ return ids.map(i => MAP[i] ? MAP[i].label : i).join(", "); }
+
+function markMine(ids, fromServer){
+  state.sel = new Set(ids.filter(i => MAP[i]));
+  state.submitted = true;
+  showBanner(
+    (fromServer ? "Deine Stimme ist gespeichert: " : "Du hast schon abgestimmt: ") +
+    "<b>" + labelsOf([...state.sel]) + "</b>" +
+    '<button class="pbtn" id="revote">neu abstimmen</button>'
+  );
+  $("#revote").addEventListener("click", () => {
+    state.sel.clear(); state.submitted = false; banner.className = "banner hidden"; paint();
+  });
+  paint();
+}
+
+submitBtn.addEventListener("click", async () => {
+  if (state.submitted || state.sel.size !== CONFIG.VOTES) return;
+  submitBtn.disabled = true; submitBtn.textContent = "Sende...";
+  const picks = [...state.sel];
+  try {
+    const res = await Backend.submit(picks, voterId);
+    if (res && res.ok){
+      localStorage.setItem(MYKEY, JSON.stringify(picks));
+      markMine(picks, true);
+      banner.className = "banner";
+    } else {
+      showBanner("Fehler beim Senden – nochmal versuchen.", true);
+    }
+  } catch(e){
+    showBanner("Netzwerkfehler – nochmal versuchen.", true);
+  }
+  submitBtn.textContent = "Abstimmen";
+  paint();
+});
+
+/* gespeicherte eigene Stimme wiederherstellen */
+(function restore(){
+  try {
+    const mine = JSON.parse(localStorage.getItem(MYKEY) || "null");
+    if (mine && mine.length === CONFIG.VOTES) markMine(mine, false);
+  } catch(e){}
+})();
+
+/* ================== 8. CODE-FENSTER ================== */
+const gate = $("#gate"), gateErr = $("#gateErr"), codeBoxes = $("#codeBoxes");
+const inputs = [...codeBoxes.querySelectorAll("input")];
+
+function openGate(){
+  gate.classList.remove("hidden");
+  codeBoxes.classList.remove("bad");
+  gateErr.textContent = "";
+  inputs.forEach(i => i.value = "");
+  inputs[0].focus();
+}
+function closeGate(){ gate.classList.add("hidden"); }
+function gateBad(msg){
+  codeBoxes.classList.remove("bad"); void codeBoxes.offsetWidth; codeBoxes.classList.add("bad");
+  gateErr.textContent = msg;
+  inputs.forEach(i => i.value = "");
+  inputs[0].focus();
+}
+
+inputs.forEach((inp, i) => {
+  inp.addEventListener("input", () => {
+    inp.value = inp.value.replace(/\D/g, "").slice(0, 1);
+    if (inp.value && i < inputs.length - 1) inputs[i + 1].focus();
+    if (inputs.every(x => x.value)) submitCode();
+  });
+  inp.addEventListener("keydown", e => {
+    if (e.key === "Backspace" && !inp.value && i > 0){
+      e.preventDefault(); inputs[i - 1].value = ""; inputs[i - 1].focus();
+    }
+    if (e.key === "Enter") submitCode();
+    if (e.key === "Escape") closeGate();
+  });
+  inp.addEventListener("paste", e => {
+    const t = (e.clipboardData.getData("text") || "").replace(/\D/g, "").slice(0, 6);
+    if (!t) return;
+    e.preventDefault();
+    inputs.forEach((x, j) => x.value = t[j] || "");
+    if (t.length === 6) submitCode(); else inputs[Math.min(t.length, 5)].focus();
+  });
+});
+
+async function submitCode(){
+  const code = inputs.map(i => i.value).join("");
+  if (code.length !== 6) return;
+  gateErr.textContent = "prüfe...";
+  const ok = await verifyCode(code);
+  if (!ok) return gateBad("Code falsch");
+  sessionStorage.setItem(CKEY, code);
+  state.code = code;
+  closeGate();
+  openPit();
+}
+
+async function verifyCode(code){
+  if (!Backend.online) return code === CONFIG.OFFLINE_CODE;
+  try {
+    const r = await fetch(CONFIG.API_URL + "?action=stats&code=" + encodeURIComponent(code) + "&t=" + Date.now());
+    const j = await r.json();
+    return !!(j && j.ok);
+  } catch(e){ return false; }
+}
+
+$("#gateOk").addEventListener("click", submitCode);
+$("#gateCancel").addEventListener("click", closeGate);
+$("#key").addEventListener("click", () => { state.code ? openPit() : openGate(); });
+
+/* Tastatur: "stats" tippen öffnet das Code-Fenster */
+let keybuf = "";
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "Escape" && !pit.classList.contains("hidden")) return closePit();
+  keybuf = (keybuf + e.key.toLowerCase()).slice(-6);
+  if (keybuf.endsWith("stats")){ keybuf = ""; state.code ? openPit() : openGate(); }
+});
+
+/* Direktlinks */
+const urlCode = new URLSearchParams(location.search).get("code");
+if (urlCode && /^\d{6}$/.test(urlCode)){ state.code = urlCode; sessionStorage.setItem(CKEY, urlCode); openPit(); }
+else if (location.hash === "#stats" || location.hash === "#admin"){ state.code ? openPit() : openGate(); }
+
+/* ================== 9. STATISTIKEN ================== */
+function openPit(){
+  if (!state.code){
+    const c = sessionStorage.getItem(CKEY);
+    if (!c) return openGate();
+    state.code = c;
+  }
+  pit.classList.remove("hidden");
+  renderStats();
+  clearInterval(state.timer);
+  state.timer = setInterval(renderStats, 20000);
+}
+function closePit(){
+  pit.classList.add("hidden");
+  clearInterval(state.timer);
+}
+
+$("#pitClose").addEventListener("click", closePit);
+$("#pitRefresh").addEventListener("click", renderStats);
+$("#pitReset").addEventListener("click", async () => {
+  if (!confirm("Alle Stimmen wirklich löschen?")) return;
+  const r = await Backend.reset(state.code);
+  if (r && r.ok){ renderStats(); } else { alert("Reset fehlgeschlagen (Code/Netz)."); }
+});
+$("#pitCsv").addEventListener("click", async () => {
+  const s = await Backend.stats(state.code);
+  if (!s || !s.ok) return alert("Keine Daten.");
+  const rows = [["Rang","Logo","Stimmen"]];
+  LOGOS.map(l => ({ l, c:(s.counts||{})[l.id] || 0 }))
+       .sort((a, b) => b.c - a.c || a.l.num - b.l.num)
+       .forEach((r, i) => rows.push([i + 1, r.l.label, r.c]));
+  rows.push([]);
+  rows.push(["Datum","Abgaben"]);
+  Object.keys(s.days || {}).sort().forEach(d => rows.push([d, s.days[d]]));
+  const csv = rows.map(r => r.map(x => '"' + String(x == null ? "" : x).replace(/"/g, '""') + '"').join(",")).join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type:"text/csv" }));
+  a.download = "logo-wahl.csv"; a.click();
+});
+
+async function renderStats(){
+  if (!pitBody.dataset.loaded) pitBody.innerHTML = '<p class="dim">Lade Daten...</p>';
+  let s;
+  try { s = await Backend.stats(state.code); } catch(e){ s = null; }
+  if (!s || !s.ok){
+    pitBody.innerHTML = '<p class="dim">Keine Daten erreichbar. ' +
+      (Backend.online ? 'Prüfe die API-URL.' : 'API_URL ist leer – es werden nur Stimmen dieses Geräts gezählt.') + '</p>';
+    return;
+  }
+  pitBody.dataset.loaded = "1";
+
+  const counts = s.counts || {};
+  const subs = s.submissions || 0;
+  const total = s.total != null ? s.total : Object.values(counts).reduce((a, b) => a + b, 0);
+  const rows = LOGOS.map(l => ({ l, c: counts[l.id] || 0 })).sort((a, b) => b.c - a.c || a.l.num - b.l.num);
+  const max = Math.max(1, ...rows.map(r => r.c));
+  const zero = rows.filter(r => r.c === 0);
+
+  $("#pitSub").textContent = Backend.online ? "live · alle Besucher" : "lokal (nur dieses Gerät)";
+
+  let h = '<div class="stat">' +
+    '<div><span>Abgaben</span><strong>' + subs + '</strong></div>' +
+    '<div><span>Stimmen</span><strong>' + total + '</strong></div>' +
+    '<div><span>Geräte</span><strong>' + (s.devices != null ? s.devices : subs) + '</strong></div>' +
+    '<div><span>Logos</span><strong>' + LOGOS.length + '</strong></div>' +
+    '<div><span>ohne Stimme</span><strong>' + zero.length + '</strong></div>' +
+  '</div>';
+
+  if (s.first || s.last){
+    const f = s.first ? new Date(s.first).toLocaleString("de-DE") : "–";
+    const l = s.last ? new Date(s.last).toLocaleString("de-DE") : "–";
+    h += '<p class="dim">erste Stimme: ' + f + ' &nbsp;·&nbsp; letzte Stimme: ' + l + '</p>';
+  }
+
+  h += '<h3>Ranking</h3>';
+  rows.forEach((r, i) => {
+    const pct = Math.round(r.c / max * 100);
+    h += '<div class="row"><div><div class="nm">' + (i + 1) + '. ' + r.l.label + '</div>' +
+         '<div class="track"><div class="fill' + (r.c ? '' : ' zero') + '" style="width:' + (r.c ? Math.max(pct, 2) : 0) + '%"></div></div></div>' +
+         '<div class="cnt' + (r.c && r.c === rows[0].c ? ' win' : '') + '">' + r.c + '</div></div>';
+  });
+
+  const days = Object.keys(s.days || {}).sort().reverse();
+  if (days.length){
+    h += '<h3>Abgaben pro Tag</h3><div class="days">';
+    days.forEach(d => { h += '<div>' + d + ' <b>' + s.days[d] + '</b></div>'; });
+    h += '</div>';
+  }
+
+  if (zero.length){
+    h += '<h3>Ohne eine einzige Stimme</h3><p class="dim">' + zero.map(r => r.l.label).join(" &middot; ") + '</p>';
+  }
+
+  h += '<h3>Sitzung</h3><p class="dim">Code ist für diese Sitzung gemerkt. ' +
+       '<button class="pbtn" id="lockBtn">Code vergessen</button></p>';
+  pitBody.innerHTML = h;
+  const lb = $("#lockBtn");
+  if (lb) lb.addEventListener("click", () => { sessionStorage.removeItem(CKEY); state.code = null; closePit(); openGate(); });
+}
+
+paint();
+</script>
+</body>
+</html>
