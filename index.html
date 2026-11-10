@@ -76,6 +76,52 @@ h3{font-size:12px;letter-spacing:2px;color:#63758a;text-transform:uppercase;marg
 .days{display:flex;gap:6px;flex-wrap:wrap}
 .days div{background:#0e151d;border:1px solid #1d2733;border-radius:8px;padding:6px 10px;font-size:12px;color:#8894a3;font-variant-numeric:tabular-nums}
 .days div b{color:#e8eef5}
+
+/* ---------- Fake-Admin ---------- */
+#fadmin{position:fixed;inset:0;z-index:85;background:#080b10;overflow:auto;display:none;color:#c9d5e2;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+#fadmin.on{display:block}
+.fabar{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:10px;padding:11px 16px;background:#0c1219;border-bottom:1px solid #1c2632;font-size:12px;letter-spacing:1.4px;flex-wrap:wrap}
+.fabar b{color:var(--acc);letter-spacing:3px}
+.fadot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px rgba(57,211,83,.18);animation:fpulse 2s infinite}
+@keyframes fpulse{50%{opacity:.3}}
+.fabody{display:grid;grid-template-columns:178px 1fr;gap:18px;max-width:1100px;margin:0 auto;padding:18px 16px 140px}
+.faside{position:sticky;top:58px;align-self:start;display:flex;flex-direction:column;gap:2px;border-right:1px solid #161f29;padding-right:10px}
+.fanav{padding:8px 10px;border-radius:7px;font-size:12.5px;color:#7d8c9d;cursor:pointer;letter-spacing:.6px}
+.fanav:hover{background:#111a23;color:#c9d5e2}
+.fanav.act{background:#12261a;color:#7ee295}
+.fatiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-bottom:16px}
+.fatile{background:#0d141c;border:1px solid #1c2632;border-radius:10px;padding:11px 13px}
+.fatile span{display:block;font-size:10px;letter-spacing:1.5px;color:#5f7185;text-transform:uppercase}
+.fatile strong{font-size:20px;color:#e8eef5;font-variant-numeric:tabular-nums}
+.facard{background:#0d141c;border:1px solid #1c2632;border-radius:12px;padding:14px 16px;margin-bottom:14px;scroll-margin-top:70px}
+.facard h4{margin:0 0 10px;font-size:11px;letter-spacing:2px;color:#63758a;text-transform:uppercase}
+.fafield{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed #17202a;font-size:12.5px}
+.fafield:last-child{border-bottom:0}
+.fafield input[type=number],.fafield input[type=text],.fafield select{background:#0a1117;border:1px solid #24303d;border-radius:6px;color:#e8eef5;padding:5px 8px;font-family:inherit;font-size:12.5px;width:118px}
+.sw{width:38px;height:20px;border-radius:99px;background:#243039;position:relative;cursor:pointer;flex:0 0 auto;transition:.15s}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#7d8c9d;transition:.15s}
+.sw.on{background:#1f6f36}
+.sw.on::after{left:20px;background:#c9f5d4}
+.fabtn{background:#141d27;border:1px solid #24303d;color:#b9c6d4;border-radius:7px;padding:7px 12px;font-size:12px;font-family:inherit;cursor:pointer}
+.fabtn:hover{background:#1b2733;color:#fff}
+.fabtn.dgr{color:#e8a49e;border-color:#4a2b28}
+.fabtn.dgr:hover{background:#2a1714}
+.fabtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.falog{position:fixed;right:0;bottom:0;left:0;max-height:112px;overflow:hidden;background:#060a0e;border-top:1px solid #1c2632;padding:8px 16px;font-size:11.5px;color:#5f7185;line-height:1.7}
+.falog b{color:#7ee295}
+.fatoast{position:fixed;right:16px;bottom:132px;z-index:4;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.toast{background:#12261a;border:1px solid #2c5a37;color:#a9e6b8;padding:9px 14px;border-radius:8px;font-size:12.5px;animation:tin .2s}
+@keyframes tin{from{opacity:0;transform:translateY(6px)}}
+.meter{width:100%;max-width:220px}
+
+/* ---------- TIMO ---------- */
+#timo{position:fixed;inset:0;z-index:95;background:rgba(4,7,10,.88);display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#timo.on{display:flex}
+.timocard{width:100%;max-width:520px;text-align:center;background:#0c131a;border:1px solid #2c5a37;border-radius:18px;padding:46px 26px 34px;box-shadow:0 0 70px rgba(57,211,83,.2),0 24px 60px rgba(0,0,0,.65);animation:tpop .22s}
+@keyframes tpop{from{transform:scale(.93);opacity:0}}
+.timocard h2{margin:0;font-family:ui-monospace,Menlo,monospace;font-size:clamp(26px,7.5vw,44px);letter-spacing:4px;color:#7ee295;text-shadow:0 0 26px rgba(57,211,83,.55)}
+.timocard p{margin:14px 0 26px;color:#8894a3;font-size:12px;letter-spacing:2.5px;text-transform:uppercase}
+@media(max-width:640px){.fabody{grid-template-columns:1fr}.faside{position:static;flex-direction:row;overflow:auto;border-right:0;border-bottom:1px solid #161f29;padding:0 0 8px}}
 </style>
 </head>
 <body>
@@ -130,6 +176,115 @@ h3{font-size:12px;letter-spacing:2px;color:#63758a;text-transform:uppercase;marg
     <button class="pbtn" id="pitClose">schliessen</button>
   </div>
   <div class="pitbody" id="pitBody"></div>
+</div>
+
+<!-- Fake-Admin -->
+<div id="fadmin">
+  <div class="fabar">
+    <b>ADMIN</b>
+    <span class="fadot"></span>
+    <span class="dim">verbunden · node eu-central-1 · tls</span>
+    <span class="grow"></span>
+    <span class="dim" id="faUser">admin@wahl</span>
+    <button class="pbtn" id="faClose">abmelden</button>
+  </div>
+  <div class="fabody">
+    <aside class="faside">
+      <div class="fanav act" data-t="sec-status">Übersicht</div>
+      <div class="fanav" data-t="sec-wahl">Wahl</div>
+      <div class="fanav" data-t="sec-logos">Logos</div>
+      <div class="fanav" data-t="sec-db">Datenbank</div>
+      <div class="fanav" data-t="sec-system">System</div>
+      <div class="fanav" data-t="sec-danger">Gefahrenzone</div>
+    </aside>
+    <main class="famain">
+      <div class="fatiles" id="sec-status">
+        <div class="fatile"><span>Status</span><strong style="color:#7ee295">OFFEN</strong></div>
+        <div class="fatile"><span>Stimmen</span><strong>1.284</strong></div>
+        <div class="fatile"><span>Geräte</span><strong>412</strong></div>
+        <div class="fatile"><span>Logos</span><strong id="faLogoCount">22</strong></div>
+        <div class="fatile"><span>Laufzeit</span><strong>4h 12m</strong></div>
+      </div>
+
+      <div class="facard">
+        <h4>Status</h4>
+        <div class="fafield"><span>Abstimmung geöffnet</span><div class="sw on"></div></div>
+        <div class="fafield"><span>Wartungsmodus</span><div class="sw"></div></div>
+        <div class="fafield"><span>Auto-Refresh (20 s)</span><div class="sw on"></div></div>
+        <div class="fafield"><span>Live-Log</span><div class="sw on"></div></div>
+      </div>
+
+      <div class="facard" id="sec-wahl">
+        <h4>Wahl konfigurieren</h4>
+        <div class="fafield"><span>Max. Stimmen pro Gerät</span><input type="number" value="3" min="1" max="10"></div>
+        <div class="fafield"><span>Zugangscode</span><input type="text" value="112210"></div>
+        <div class="fafield"><span>Sortierung</span>
+          <select><option>Zufällig</option><option>Fixe Reihenfolge</option><option>Nach ID</option></select>
+        </div>
+        <div class="fafield"><span>Speicherintervall</span>
+          <select><option>30 s</option><option>60 s</option><option>5 min</option></select>
+        </div>
+        <div class="fafield"><span>Mehrfachabstimmung erlauben</span><div class="sw"></div></div>
+        <div class="fafield"><span>IP-Sperre aktiv</span><div class="sw on"></div></div>
+        <div class="fabtns">
+          <button class="fabtn" data-fa="save">Konfiguration speichern</button>
+          <button class="fabtn" data-fa="code">Code neu generieren</button>
+        </div>
+      </div>
+
+      <div class="facard" id="sec-logos">
+        <h4>Logos verwalten</h4>
+        <div id="faLogoList"></div>
+        <div class="fabtns">
+          <button class="fabtn" data-fa="allOn">alle aktivieren</button>
+          <button class="fabtn" data-fa="allOff">alle deaktivieren</button>
+        </div>
+      </div>
+
+      <div class="facard" id="sec-db">
+        <h4>Datenbank</h4>
+        <div class="fafield"><span>Auto-Backup täglich</span><div class="sw on"></div></div>
+        <div class="fafield"><span>Tabellen</span><span class="dim">votes · devices · codes</span></div>
+        <div class="fabtns">
+          <button class="fabtn" data-fa="export">CSV exportieren</button>
+          <button class="fabtn" data-fa="backup">Backup erstellen</button>
+          <button class="fabtn" data-fa="reindex">Index neu aufbauen</button>
+          <button class="fabtn" data-fa="cache">Cache leeren</button>
+          <button class="fabtn" data-fa="optimize">Tabellen optimieren</button>
+        </div>
+      </div>
+
+      <div class="facard" id="sec-system">
+        <h4>System</h4>
+        <div class="fafield"><span>Region</span>
+          <select><option>eu-central-1</option><option>eu-west-1</option><option>us-east-1</option></select>
+        </div>
+        <div class="fafield"><span>CPU</span><div class="meter"><div class="track"><div class="fill" id="faCpu" style="width:14%"></div></div></div></div>
+        <div class="fafield"><span>RAM</span><div class="meter"><div class="track"><div class="fill" id="faRam" style="width:38%"></div></div></div></div>
+        <div class="fafield"><span>Quota</span><span class="dim">0,41 % von 50k / Tag</span></div>
+        <div class="fafield"><span>Debug-Modus</span><div class="sw"></div></div>
+      </div>
+
+      <div class="facard" id="sec-danger">
+        <h4>Gefahrenzone</h4>
+        <div class="fabtns">
+          <button class="fabtn dgr" data-fa="wipe">Alle Stimmen löschen</button>
+          <button class="fabtn dgr" data-fa="resetwahl">Wahl zurücksetzen</button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div class="falog" id="faLog"></div>
+  <div class="fatoast" id="faToast"></div>
+</div>
+
+<!-- TIMO -->
+<div id="timo">
+  <div class="timocard">
+    <h2>TIMO IST GEIL</h2>
+    <p>Code 112233 · Freigabe erteilt</p>
+    <button class="main" id="timoClose">Weiter</button>
+  </div>
 </div>
 
 <script>
@@ -231,6 +386,9 @@ const state = { sel:new Set(), submitted:false, code:null, timer:null };
 const $ = s => document.querySelector(s);
 const grid = $("#grid"), banner = $("#banner"), cnt = $("#cnt"), hintLine = $("#hintLine");
 const submitBtn = $("#submitBtn"), pit = $("#pit"), pitBody = $("#pitBody");
+
+const fadmin = $("#fadmin"), faToast = $("#faToast"), faLog = $("#faLog"), timo = $("#timo");
+let faLogTimer = null, faSysTimer = null;
 
 /* ================== 5. LOGOS RENDERN ================== */
 function build(){
@@ -354,6 +512,11 @@ inputs.forEach((inp, i) => {
 async function submitCode(){
   const code = inputs.map(i => i.value).join("");
   if (code.length !== 6) return;
+
+  /* --- Spass-Codes: 123456 = Fake-Admin, 112233 = TIMO --- */
+  if (code === "123456"){ closeGate(); openFakeAdmin(); return; }
+  if (code === "112233"){ closeGate(); openTimo(); return; }
+
   gateErr.textContent = "prüfe...";
   const ok = await verifyCode(code);
   if (!ok) return gateBad("Code falsch");
@@ -385,9 +548,20 @@ document.addEventListener("keydown", e => {
   if (keybuf.endsWith("stats")){ keybuf = ""; state.code ? openPit() : openGate(); }
 });
 
+/* Escape schliesst Fake-Admin / TIMO */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (timo.classList.contains("on")) return closeTimo();
+  if (fadmin.classList.contains("on")) return closeFakeAdmin();
+});
+
 /* Direktlinks */
 const urlCode = new URLSearchParams(location.search).get("code");
-if (urlCode && /^\d{6}$/.test(urlCode)){ state.code = urlCode; sessionStorage.setItem(CKEY, urlCode); openPit(); }
+if (urlCode && /^\d{6}$/.test(urlCode)){
+  if (urlCode === "123456") openFakeAdmin();
+  else if (urlCode === "112233") openTimo();
+  else { state.code = urlCode; sessionStorage.setItem(CKEY, urlCode); openPit(); }
+}
 else if (location.hash === "#stats" || location.hash === "#admin"){ state.code ? openPit() : openGate(); }
 
 /* ================== 9. STATISTIKEN ================== */
@@ -489,6 +663,115 @@ async function renderStats(){
   const lb = $("#lockBtn");
   if (lb) lb.addEventListener("click", () => { sessionStorage.removeItem(CKEY); state.code = null; closePit(); openGate(); });
 }
+
+/* ================== 10. FAKE-ADMIN ================== */
+const FA_MSGS = {
+  save: "Konfiguration gespeichert ✓",
+  code: "Neuer Zugangscode generiert: 84 20 91 ✓",
+  export: "Export erstellt: wahl_export.csv ✓",
+  backup: "Backup nach s3://wahl-backups/ abgelegt ✓",
+  reindex: "Index neu aufgebaut · 1.284 Datensätze ✓",
+  cache: "Cache geleert (34 Dateien) ✓",
+  optimize: "Tabellen optimiert ✓",
+  wipe: "Alle Stimmen gelöscht ✓",
+  resetwahl: "Wahl zurückgesetzt ✓",
+  allOn: "Alle Logos aktiviert ✓",
+  allOff: "Alle Logos deaktiviert ✓"
+};
+
+const FA_LOG = [
+  "GET /exec?action=stats 200 · 84 ms",
+  "vote gespeichert · L07,L12,L19 · device 6f2a…",
+  "vote gespeichert · L03,L11,L20 · device 1c9d…",
+  "heartbeat ok · node eu-central-1 · rtt 12 ms",
+  "GET /exec?action=stats 200 · 91 ms",
+  "cache hit · stats:6b1f",
+  "vote gespeichert · L05,L09,L14 · device a03b…",
+  "session gc · 0 verwaiste Einträge",
+  "GET /logos/L16.png 304 · 3 ms",
+  "quota ok · 0,41 % von 50k/Tag",
+  "vote gespeichert · L02,L08,L21 · device 9d44…",
+  "GET /exec?action=stats 200 · 77 ms"
+];
+
+function faBuildLogos(){
+  $("#faLogoList").innerHTML = LOGOS.map((l, i) =>
+    '<div class="fafield"><span>' + l.label + ' <span class="dim">' + l.file + '</span></span>' +
+    '<div class="sw' + (i % 6 === 4 ? '' : ' on') + '"></div></div>'
+  ).join("");
+}
+
+function faNotify(msg){
+  const d = document.createElement("div");
+  d.className = "toast";
+  d.textContent = msg;
+  faToast.appendChild(d);
+  setTimeout(() => d.remove(), 3200);
+}
+
+function faLogLine(txt){
+  const d = document.createElement("div");
+  d.innerHTML = '<b>' + new Date().toLocaleTimeString("de-DE") + '</b> ' + txt;
+  faLog.appendChild(d);
+  while (faLog.children.length > 6) faLog.firstChild.remove();
+}
+
+function faSys(){
+  const cpu = $("#faCpu"), ram = $("#faRam");
+  if (cpu) cpu.style.width = (10 + Math.random() * 45).toFixed(0) + "%";
+  if (ram) ram.style.width = (30 + Math.random() * 35).toFixed(0) + "%";
+}
+
+function openFakeAdmin(){
+  fadmin.classList.add("on");
+  faBuildLogos();
+  faLog.innerHTML = "";
+  $("#faLogoCount").textContent = LOGOS.length;
+  faLogLine("session gestartet · admin@wahl · 2fa ok");
+  clearInterval(faLogTimer); clearInterval(faSysTimer);
+  faLogTimer = setInterval(() => faLogLine(FA_LOG[Math.floor(Math.random() * FA_LOG.length)]), 4200);
+  faSysTimer = setInterval(faSys, 1600);
+  faSys();
+}
+
+function closeFakeAdmin(){
+  fadmin.classList.remove("on");
+  clearInterval(faLogTimer); clearInterval(faSysTimer);
+  faToast.innerHTML = "";
+}
+
+fadmin.addEventListener("click", e => {
+  const sw = e.target.closest(".sw");
+  if (sw){ sw.classList.toggle("on"); return; }
+
+  const btn = e.target.closest("[data-fa]");
+  if (btn){
+    const k = btn.dataset.fa;
+    if (k === "allOn" || k === "allOff"){
+      fadmin.querySelectorAll("#faLogoList .sw").forEach(s => s.classList.toggle("on", k === "allOn"));
+    }
+    faNotify(FA_MSGS[k] || "OK ✓");
+    faLogLine("admin: " + (FA_MSGS[k] || k));
+    return;
+  }
+
+  const nav = e.target.closest(".fanav");
+  if (nav){
+    fadmin.querySelectorAll(".fanav").forEach(n => n.classList.remove("act"));
+    nav.classList.add("act");
+    const t = document.getElementById(nav.dataset.t);
+    if (t) t.scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+});
+
+$("#faClose").addEventListener("click", closeFakeAdmin);
+
+/* ================== 11. TIMO-FENSTER ================== */
+function openTimo(){ timo.classList.add("on"); }
+function closeTimo(){ timo.classList.remove("on"); }
+
+$("#timoClose").addEventListener("click", closeTimo);
+timo.addEventListener("click", e => { if (e.target === timo) closeTimo(); });
 
 paint();
 </script>
