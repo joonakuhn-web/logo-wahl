@@ -178,115 +178,6 @@ h3{font-size:12px;letter-spacing:2px;color:#63758a;text-transform:uppercase;marg
   <div class="pitbody" id="pitBody"></div>
 </div>
 
-<!-- Fake-Admin -->
-<div id="fadmin">
-  <div class="fabar">
-    <b>ADMIN</b>
-    <span class="fadot"></span>
-    <span class="dim">verbunden · node eu-central-1 · tls</span>
-    <span class="grow"></span>
-    <span class="dim" id="faUser">admin@wahl</span>
-    <button class="pbtn" id="faClose">abmelden</button>
-  </div>
-  <div class="fabody">
-    <aside class="faside">
-      <div class="fanav act" data-t="sec-status">Übersicht</div>
-      <div class="fanav" data-t="sec-wahl">Wahl</div>
-      <div class="fanav" data-t="sec-logos">Logos</div>
-      <div class="fanav" data-t="sec-db">Datenbank</div>
-      <div class="fanav" data-t="sec-system">System</div>
-      <div class="fanav" data-t="sec-danger">Gefahrenzone</div>
-    </aside>
-    <main class="famain">
-      <div class="fatiles" id="sec-status">
-        <div class="fatile"><span>Status</span><strong style="color:#7ee295">OFFEN</strong></div>
-        <div class="fatile"><span>Stimmen</span><strong>1.284</strong></div>
-        <div class="fatile"><span>Geräte</span><strong>412</strong></div>
-        <div class="fatile"><span>Logos</span><strong id="faLogoCount">22</strong></div>
-        <div class="fatile"><span>Laufzeit</span><strong>4h 12m</strong></div>
-      </div>
-
-      <div class="facard">
-        <h4>Status</h4>
-        <div class="fafield"><span>Abstimmung geöffnet</span><div class="sw on"></div></div>
-        <div class="fafield"><span>Wartungsmodus</span><div class="sw"></div></div>
-        <div class="fafield"><span>Auto-Refresh (20 s)</span><div class="sw on"></div></div>
-        <div class="fafield"><span>Live-Log</span><div class="sw on"></div></div>
-      </div>
-
-      <div class="facard" id="sec-wahl">
-        <h4>Wahl konfigurieren</h4>
-        <div class="fafield"><span>Max. Stimmen pro Gerät</span><input type="number" value="3" min="1" max="10"></div>
-        <div class="fafield"><span>Zugangscode</span><input type="text" value="112210"></div>
-        <div class="fafield"><span>Sortierung</span>
-          <select><option>Zufällig</option><option>Fixe Reihenfolge</option><option>Nach ID</option></select>
-        </div>
-        <div class="fafield"><span>Speicherintervall</span>
-          <select><option>30 s</option><option>60 s</option><option>5 min</option></select>
-        </div>
-        <div class="fafield"><span>Mehrfachabstimmung erlauben</span><div class="sw"></div></div>
-        <div class="fafield"><span>IP-Sperre aktiv</span><div class="sw on"></div></div>
-        <div class="fabtns">
-          <button class="fabtn" data-fa="save">Konfiguration speichern</button>
-          <button class="fabtn" data-fa="code">Code neu generieren</button>
-        </div>
-      </div>
-
-      <div class="facard" id="sec-logos">
-        <h4>Logos verwalten</h4>
-        <div id="faLogoList"></div>
-        <div class="fabtns">
-          <button class="fabtn" data-fa="allOn">alle aktivieren</button>
-          <button class="fabtn" data-fa="allOff">alle deaktivieren</button>
-        </div>
-      </div>
-
-      <div class="facard" id="sec-db">
-        <h4>Datenbank</h4>
-        <div class="fafield"><span>Auto-Backup täglich</span><div class="sw on"></div></div>
-        <div class="fafield"><span>Tabellen</span><span class="dim">votes · devices · codes</span></div>
-        <div class="fabtns">
-          <button class="fabtn" data-fa="export">CSV exportieren</button>
-          <button class="fabtn" data-fa="backup">Backup erstellen</button>
-          <button class="fabtn" data-fa="reindex">Index neu aufbauen</button>
-          <button class="fabtn" data-fa="cache">Cache leeren</button>
-          <button class="fabtn" data-fa="optimize">Tabellen optimieren</button>
-        </div>
-      </div>
-
-      <div class="facard" id="sec-system">
-        <h4>System</h4>
-        <div class="fafield"><span>Region</span>
-          <select><option>eu-central-1</option><option>eu-west-1</option><option>us-east-1</option></select>
-        </div>
-        <div class="fafield"><span>CPU</span><div class="meter"><div class="track"><div class="fill" id="faCpu" style="width:14%"></div></div></div></div>
-        <div class="fafield"><span>RAM</span><div class="meter"><div class="track"><div class="fill" id="faRam" style="width:38%"></div></div></div></div>
-        <div class="fafield"><span>Quota</span><span class="dim">0,41 % von 50k / Tag</span></div>
-        <div class="fafield"><span>Debug-Modus</span><div class="sw"></div></div>
-      </div>
-
-      <div class="facard" id="sec-danger">
-        <h4>Gefahrenzone</h4>
-        <div class="fabtns">
-          <button class="fabtn dgr" data-fa="wipe">Alle Stimmen löschen</button>
-          <button class="fabtn dgr" data-fa="resetwahl">Wahl zurücksetzen</button>
-        </div>
-      </div>
-    </main>
-  </div>
-  <div class="falog" id="faLog"></div>
-  <div class="fatoast" id="faToast"></div>
-</div>
-
-<!-- TIMO -->
-<div id="timo">
-  <div class="timocard">
-    <h2>TIMO IST GEIL</h2>
-    <p>Code 112233 · Freigabe erteilt</p>
-    <button class="main" id="timoClose">Weiter</button>
-  </div>
-</div>
-
 <script>
 /* ================== 1. KONFIGURATION ================== */
 const CONFIG = {
@@ -387,9 +278,6 @@ const $ = s => document.querySelector(s);
 const grid = $("#grid"), banner = $("#banner"), cnt = $("#cnt"), hintLine = $("#hintLine");
 const submitBtn = $("#submitBtn"), pit = $("#pit"), pitBody = $("#pitBody");
 
-const fadmin = $("#fadmin"), faToast = $("#faToast"), faLog = $("#faLog"), timo = $("#timo");
-let faLogTimer = null, faSysTimer = null;
-
 /* ================== 5. LOGOS RENDERN ================== */
 function build(){
   grid.innerHTML = LOGOS.map(l =>
@@ -472,14 +360,19 @@ submitBtn.addEventListener("click", async () => {
 const gate = $("#gate"), gateErr = $("#gateErr"), codeBoxes = $("#codeBoxes");
 const inputs = [...codeBoxes.querySelectorAll("input")];
 
+/* Ziffern-Puffer: erkennt die Spass-Codes schon beim Tippen,
+   auch wenn die Kästchen nicht sauber gefüllt werden. */
+let gateBuf = "", lastKeyTs = 0;
+
 function openGate(){
   gate.classList.remove("hidden");
   codeBoxes.classList.remove("bad");
   gateErr.textContent = "";
+  gateBuf = ""; lastKeyTs = 0;
   inputs.forEach(i => i.value = "");
   inputs[0].focus();
 }
-function closeGate(){ gate.classList.add("hidden"); }
+function closeGate(){ gate.classList.add("hidden"); gateBuf = ""; }
 function gateBad(msg){
   codeBoxes.classList.remove("bad"); void codeBoxes.offsetWidth; codeBoxes.classList.add("bad");
   gateErr.textContent = msg;
@@ -487,10 +380,36 @@ function gateBad(msg){
   inputs[0].focus();
 }
 
+/* Codes: 123456 = Fake-Admin · 112233 = TIMO */
+function runSpecialCode(code){
+  code = String(code || "").replace(/\D/g, "");
+  if (code === "123456"){ closeGate(); openFakeAdmin(); return true; }
+  if (code === "112233"){ closeGate(); openTimo(); return true; }
+  return false;
+}
+
+function gateCheck(){
+  if (gateBuf.length < 6) return false;
+  return runSpecialCode(gateBuf.slice(-6));
+}
+
+/* 1) Tippen direkt am Fenster abfangen (Capture) */
+gate.addEventListener("keydown", e => {
+  if (!/^[0-9]$/.test(e.key)) return;
+  lastKeyTs = Date.now();
+  gateBuf = (gateBuf + e.key).slice(-24);
+  gateCheck();
+}, true);
+
 inputs.forEach((inp, i) => {
   inp.addEventListener("input", () => {
-    inp.value = inp.value.replace(/\D/g, "").slice(0, 1);
-    if (inp.value && i < inputs.length - 1) inputs[i + 1].focus();
+    const d = inp.value.replace(/\D/g, "").slice(0, 1);
+    inp.value = d;
+    if (d && Date.now() - lastKeyTs > 60){
+      gateBuf = (gateBuf + d).slice(-24);
+      if (gateCheck()) return;
+    }
+    if (d && i < inputs.length - 1) inputs[i + 1].focus();
     if (inputs.every(x => x.value)) submitCode();
   });
   inp.addEventListener("keydown", e => {
@@ -505,17 +424,20 @@ inputs.forEach((inp, i) => {
     if (!t) return;
     e.preventDefault();
     inputs.forEach((x, j) => x.value = t[j] || "");
+    gateBuf = (gateBuf + t).slice(-24);
+    if (gateCheck()) return;
     if (t.length === 6) submitCode(); else inputs[Math.min(t.length, 5)].focus();
   });
 });
 
 async function submitCode(){
-  const code = inputs.map(i => i.value).join("");
-  if (code.length !== 6) return;
+  const code = inputs.map(i => i.value).join("").replace(/\D/g, "");
 
-  /* --- Spass-Codes: 123456 = Fake-Admin, 112233 = TIMO --- */
-  if (code === "123456"){ closeGate(); openFakeAdmin(); return; }
-  if (code === "112233"){ closeGate(); openTimo(); return; }
+  /* Spass-Codes zuerst – egal ob 6 Kästchen voll sind oder nur der Puffer passt */
+  if (runSpecialCode(code)) return;
+  if (gateCheck()) return;
+
+  if (code.length !== 6){ gateErr.textContent = "6 Ziffern eingeben"; return; }
 
   gateErr.textContent = "prüfe...";
   const ok = await verifyCode(code);
@@ -551,18 +473,9 @@ document.addEventListener("keydown", e => {
 /* Escape schliesst Fake-Admin / TIMO */
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
-  if (timo.classList.contains("on")) return closeTimo();
-  if (fadmin.classList.contains("on")) return closeFakeAdmin();
+  if (timo && timo.classList.contains("on")) return closeTimo();
+  if (fadmin && fadmin.classList.contains("on")) return closeFakeAdmin();
 });
-
-/* Direktlinks */
-const urlCode = new URLSearchParams(location.search).get("code");
-if (urlCode && /^\d{6}$/.test(urlCode)){
-  if (urlCode === "123456") openFakeAdmin();
-  else if (urlCode === "112233") openTimo();
-  else { state.code = urlCode; sessionStorage.setItem(CKEY, urlCode); openPit(); }
-}
-else if (location.hash === "#stats" || location.hash === "#admin"){ state.code ? openPit() : openGate(); }
 
 /* ================== 9. STATISTIKEN ================== */
 function openPit(){
@@ -664,7 +577,94 @@ async function renderStats(){
   if (lb) lb.addEventListener("click", () => { sessionStorage.removeItem(CKEY); state.code = null; closePit(); openGate(); });
 }
 
-/* ================== 10. FAKE-ADMIN ================== */
+/* ================== 10. OVERLAYS (Fake-Admin / TIMO) ================== */
+let fadmin = null, faToast = null, faLog = null, timo = null;
+let faLogTimer = null, faSysTimer = null;
+
+const FA_ADMIN_HTML =
+  '<div class="fabar">' +
+    '<b>ADMIN</b><span class="fadot"></span>' +
+    '<span class="dim">verbunden · node eu-central-1 · tls</span>' +
+    '<span class="grow"></span><span class="dim">admin@wahl</span>' +
+    '<button class="pbtn" id="faClose">abmelden</button>' +
+  '</div>' +
+  '<div class="fabody">' +
+    '<aside class="faside">' +
+      '<div class="fanav act" data-t="sec-status">Übersicht</div>' +
+      '<div class="fanav" data-t="sec-wahl">Wahl</div>' +
+      '<div class="fanav" data-t="sec-logos">Logos</div>' +
+      '<div class="fanav" data-t="sec-db">Datenbank</div>' +
+      '<div class="fanav" data-t="sec-system">System</div>' +
+      '<div class="fanav" data-t="sec-danger">Gefahrenzone</div>' +
+    '</aside>' +
+    '<main class="famain">' +
+      '<div class="fatiles" id="sec-status">' +
+        '<div class="fatile"><span>Status</span><strong style="color:#7ee295">OFFEN</strong></div>' +
+        '<div class="fatile"><span>Stimmen</span><strong>1.284</strong></div>' +
+        '<div class="fatile"><span>Geräte</span><strong>412</strong></div>' +
+        '<div class="fatile"><span>Logos</span><strong id="faLogoCount">0</strong></div>' +
+        '<div class="fatile"><span>Laufzeit</span><strong>4h 12m</strong></div>' +
+      '</div>' +
+      '<div class="facard">' +
+        '<h4>Status</h4>' +
+        '<div class="fafield"><span>Abstimmung geöffnet</span><div class="sw on"></div></div>' +
+        '<div class="fafield"><span>Wartungsmodus</span><div class="sw"></div></div>' +
+        '<div class="fafield"><span>Auto-Refresh (20 s)</span><div class="sw on"></div></div>' +
+        '<div class="fafield"><span>Live-Log</span><div class="sw on"></div></div>' +
+      '</div>' +
+      '<div class="facard" id="sec-wahl">' +
+        '<h4>Wahl konfigurieren</h4>' +
+        '<div class="fafield"><span>Max. Stimmen pro Gerät</span><input type="number" value="3" min="1" max="10"></div>' +
+        '<div class="fafield"><span>Zugangscode</span><input type="text" value="112210"></div>' +
+        '<div class="fafield"><span>Sortierung</span><select><option>Zufällig</option><option>Fixe Reihenfolge</option><option>Nach ID</option></select></div>' +
+        '<div class="fafield"><span>Speicherintervall</span><select><option>30 s</option><option>60 s</option><option>5 min</option></select></div>' +
+        '<div class="fafield"><span>Mehrfachabstimmung erlauben</span><div class="sw"></div></div>' +
+        '<div class="fafield"><span>IP-Sperre aktiv</span><div class="sw on"></div></div>' +
+        '<div class="fabtns">' +
+          '<button class="fabtn" data-fa="save">Konfiguration speichern</button>' +
+          '<button class="fabtn" data-fa="code">Code neu generieren</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="facard" id="sec-logos">' +
+        '<h4>Logos verwalten</h4>' +
+        '<div id="faLogoList"></div>' +
+        '<div class="fabtns">' +
+          '<button class="fabtn" data-fa="allOn">alle aktivieren</button>' +
+          '<button class="fabtn" data-fa="allOff">alle deaktivieren</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="facard" id="sec-db">' +
+        '<h4>Datenbank</h4>' +
+        '<div class="fafield"><span>Auto-Backup täglich</span><div class="sw on"></div></div>' +
+        '<div class="fafield"><span>Tabellen</span><span class="dim">votes · devices · codes</span></div>' +
+        '<div class="fabtns">' +
+          '<button class="fabtn" data-fa="export">CSV exportieren</button>' +
+          '<button class="fabtn" data-fa="backup">Backup erstellen</button>' +
+          '<button class="fabtn" data-fa="reindex">Index neu aufbauen</button>' +
+          '<button class="fabtn" data-fa="cache">Cache leeren</button>' +
+          '<button class="fabtn" data-fa="optimize">Tabellen optimieren</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="facard" id="sec-system">' +
+        '<h4>System</h4>' +
+        '<div class="fafield"><span>Region</span><select><option>eu-central-1</option><option>eu-west-1</option><option>us-east-1</option></select></div>' +
+        '<div class="fafield"><span>CPU</span><div class="meter"><div class="track"><div class="fill" id="faCpu" style="width:14%"></div></div></div></div>' +
+        '<div class="fafield"><span>RAM</span><div class="meter"><div class="track"><div class="fill" id="faRam" style="width:38%"></div></div></div></div>' +
+        '<div class="fafield"><span>Quota</span><span class="dim">0,41 % von 50k / Tag</span></div>' +
+        '<div class="fafield"><span>Debug-Modus</span><div class="sw"></div></div>' +
+      '</div>' +
+      '<div class="facard" id="sec-danger">' +
+        '<h4>Gefahrenzone</h4>' +
+        '<div class="fabtns">' +
+          '<button class="fabtn dgr" data-fa="wipe">Alle Stimmen löschen</button>' +
+          '<button class="fabtn dgr" data-fa="resetwahl">Wahl zurücksetzen</button>' +
+        '</div>' +
+      '</div>' +
+    '</main>' +
+  '</div>' +
+  '<div class="falog" id="faLog"></div>' +
+  '<div class="fatoast" id="faToast"></div>';
+
 const FA_MSGS = {
   save: "Konfiguration gespeichert ✓",
   code: "Neuer Zugangscode generiert: 84 20 91 ✓",
@@ -694,14 +694,58 @@ const FA_LOG = [
   "GET /exec?action=stats 200 · 77 ms"
 ];
 
+function ensureOverlays(){
+  if (!timo){
+    timo = document.getElementById("timo");
+    if (!timo){
+      timo = document.createElement("div");
+      timo.id = "timo";
+      timo.innerHTML = '<div class="timocard"><h2>TIMO IST GEIL</h2>' +
+        '<p>Code 112233 · Freigabe erteilt</p>' +
+        '<button class="main" id="timoClose">Weiter</button></div>';
+      document.body.appendChild(timo);
+      timo.addEventListener("click", e => { if (e.target === timo) closeTimo(); });
+      timo.querySelector("#timoClose").addEventListener("click", closeTimo);
+    }
+  }
+  if (!fadmin){
+    fadmin = document.getElementById("fadmin");
+    if (!fadmin){
+      fadmin = document.createElement("div");
+      fadmin.id = "fadmin";
+      fadmin.innerHTML = FA_ADMIN_HTML;
+      document.body.appendChild(fadmin);
+    }
+    faToast = fadmin.querySelector("#faToast");
+    faLog = fadmin.querySelector("#faLog");
+    if (!fadmin.dataset.bound){
+      fadmin.dataset.bound = "1";
+      const cl = fadmin.querySelector("#faClose");
+      if (cl) cl.addEventListener("click", closeFakeAdmin);
+      fadmin.addEventListener("click", faClick);
+      fadmin.querySelectorAll(".fanav").forEach(n => {
+        n.addEventListener("click", () => {
+          fadmin.querySelectorAll(".fanav").forEach(x => x.classList.remove("act"));
+          n.classList.add("act");
+          const t = document.getElementById(n.dataset.t);
+          if (t) t.scrollIntoView({ behavior:"smooth", block:"start" });
+        });
+      });
+    }
+  }
+}
+
 function faBuildLogos(){
-  $("#faLogoList").innerHTML = LOGOS.map((l, i) =>
+  const list = document.getElementById("faLogoList");
+  if (!list) return;
+  list.innerHTML = LOGOS.map((l, i) =>
     '<div class="fafield"><span>' + l.label + ' <span class="dim">' + l.file + '</span></span>' +
     '<div class="sw' + (i % 6 === 4 ? '' : ' on') + '"></div></div>'
   ).join("");
 }
 
 function faNotify(msg){
+  if (!faToast) return;
   const d = document.createElement("div");
   d.className = "toast";
   d.textContent = msg;
@@ -710,6 +754,7 @@ function faNotify(msg){
 }
 
 function faLogLine(txt){
+  if (!faLog) return;
   const d = document.createElement("div");
   d.innerHTML = '<b>' + new Date().toLocaleTimeString("de-DE") + '</b> ' + txt;
   faLog.appendChild(d);
@@ -717,17 +762,37 @@ function faLogLine(txt){
 }
 
 function faSys(){
-  const cpu = $("#faCpu"), ram = $("#faRam");
+  const cpu = document.getElementById("faCpu"), ram = document.getElementById("faRam");
   if (cpu) cpu.style.width = (10 + Math.random() * 45).toFixed(0) + "%";
   if (ram) ram.style.width = (30 + Math.random() * 35).toFixed(0) + "%";
 }
 
+function faClick(e){
+  const sw = e.target.closest(".sw");
+  if (sw){ sw.classList.toggle("on"); return; }
+
+  const btn = e.target.closest("[data-fa]");
+  if (!btn) return;
+  const k = btn.dataset.fa;
+  if (k === "allOn" || k === "allOff"){
+    fadmin.querySelectorAll("#faLogoList .sw").forEach(s => s.classList.toggle("on", k === "allOn"));
+  }
+  faNotify(FA_MSGS[k] || "OK ✓");
+  faLogLine("admin: " + (FA_MSGS[k] || k));
+}
+
 function openFakeAdmin(){
+  try { ensureOverlays(); } catch(err){ console.error(err); }
+  if (!fadmin){ alert("Admin-Konsole konnte nicht geladen werden."); return; }
+
   fadmin.classList.add("on");
+  if (faToast) faToast.innerHTML = "";
   faBuildLogos();
-  faLog.innerHTML = "";
-  $("#faLogoCount").textContent = LOGOS.length;
+  if (faLog) faLog.innerHTML = "";
+  const lc = document.getElementById("faLogoCount");
+  if (lc) lc.textContent = LOGOS.length;
   faLogLine("session gestartet · admin@wahl · 2fa ok");
+
   clearInterval(faLogTimer); clearInterval(faSysTimer);
   faLogTimer = setInterval(() => faLogLine(FA_LOG[Math.floor(Math.random() * FA_LOG.length)]), 4200);
   faSysTimer = setInterval(faSys, 1600);
@@ -735,43 +800,29 @@ function openFakeAdmin(){
 }
 
 function closeFakeAdmin(){
+  if (!fadmin) return;
   fadmin.classList.remove("on");
   clearInterval(faLogTimer); clearInterval(faSysTimer);
-  faToast.innerHTML = "";
+  if (faToast) faToast.innerHTML = "";
 }
 
-fadmin.addEventListener("click", e => {
-  const sw = e.target.closest(".sw");
-  if (sw){ sw.classList.toggle("on"); return; }
+function openTimo(){
+  try { ensureOverlays(); } catch(err){ console.error(err); }
+  if (!timo){ alert("TIMO IST GEIL"); return; }
+  timo.classList.add("on");
+}
+function closeTimo(){ if (timo) timo.classList.remove("on"); }
 
-  const btn = e.target.closest("[data-fa]");
-  if (btn){
-    const k = btn.dataset.fa;
-    if (k === "allOn" || k === "allOff"){
-      fadmin.querySelectorAll("#faLogoList .sw").forEach(s => s.classList.toggle("on", k === "allOn"));
-    }
-    faNotify(FA_MSGS[k] || "OK ✓");
-    faLogLine("admin: " + (FA_MSGS[k] || k));
-    return;
-  }
-
-  const nav = e.target.closest(".fanav");
-  if (nav){
-    fadmin.querySelectorAll(".fanav").forEach(n => n.classList.remove("act"));
-    nav.classList.add("act");
-    const t = document.getElementById(nav.dataset.t);
-    if (t) t.scrollIntoView({ behavior:"smooth", block:"start" });
-  }
-});
-
-$("#faClose").addEventListener("click", closeFakeAdmin);
-
-/* ================== 11. TIMO-FENSTER ================== */
-function openTimo(){ timo.classList.add("on"); }
-function closeTimo(){ timo.classList.remove("on"); }
-
-$("#timoClose").addEventListener("click", closeTimo);
-timo.addEventListener("click", e => { if (e.target === timo) closeTimo(); });
+/* ================== 11. DIREKTLINKS ================== */
+const urlCode = new URLSearchParams(location.search).get("code");
+if (urlCode && /^\d{6}$/.test(urlCode)){
+  if (urlCode === "123456") openFakeAdmin();
+  else if (urlCode === "112233") openTimo();
+  else { state.code = urlCode; sessionStorage.setItem(CKEY, urlCode); openPit(); }
+}
+else if (location.hash === "#stats" || location.hash === "#admin"){
+  state.code ? openPit() : openGate();
+}
 
 paint();
 </script>
